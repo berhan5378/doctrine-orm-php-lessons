@@ -30,7 +30,7 @@ This repository contains a series of lessons aimed at learning Doctrine ORM in P
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/doctrine-orm-php-lessons.git
+    git clone https://github.com/berhan5378/doctrine-orm-php-lessons.git
     cd doctrine-orm-php-lessons
     ```
 
