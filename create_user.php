@@ -1,5 +1,6 @@
 <?php
-$entityManager = require_once 'bootstrap.php';
+  require_once 'bootstrap.php';
+  $entityManager = GetEntityManager();
 
 if ($entityManager === false) {
     echo "Entity Manager could not be initialized.\n";

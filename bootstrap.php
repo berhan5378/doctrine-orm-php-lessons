@@ -25,7 +25,11 @@ $conn = [
 
 try {
     $entityManager = \Doctrine\ORM\EntityManager::create($conn, $config);
+   function GetEntityManager(): EntityManager
+{
+    global $entityManager;
     return $entityManager;
+}
 } catch (\Exception $e) {
     echo "Error creating EntityManager: " . $e->getMessage() . "\n";
     return false;

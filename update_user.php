@@ -1,27 +1,36 @@
 <?php
-$entityManager = require_once 'bootstrap.php';
-
+  require_once 'bootstrap.php';
+  $entityManager = GetEntityManager();
 if ($entityManager === false) {
     echo "Entity Manager could not be initialized.\n";
     exit(1);
 } 
 
 use App\Entity\User;
+$userRepository = $entityManager->getRepository(User::class);
 
-// Find a user by its primary key (ID)
-$userId = 1;
-$user = $entityManager->find(User::class, $id=$userId);
+//Find Users by Criteria
+/*
+$users = $userRepository->findBy(['email' => 'jan.doe@example.com']);
 
-if ($user === null) {
-    echo "User with ID $userId does not exist.\n";
+if ($users === null) {
+    echo "User does not exist.\n";
     exit(1);
 }
+foreach($users as $user){
+    $user->setName('Jane Doe');
+    $user->setEmail('jane.doe@example.com');
+    
+    echo "Updated User with ID " . $user->getId() . "\n";
+}
+*/
 
-// Update the user's name and email
-$user->setName('Jane Doe');
-$user->setEmail('jane.doe@example.com');
+//Find User by ID
+
+$user = $userRepository->find(2);
+echo $user ? $user->setName('Jane Doe'). "Updated User with ID " . $user->getId() . "\n": 'User not found';
+
 
 // Flush the changes to the database
-$entityManager->flush();
 
-echo "Updated User with ID " . $user->getId() . "\n";
+$entityManager->flush();

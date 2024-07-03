@@ -1,5 +1,6 @@
 <?php
-$entityManager = require_once 'bootstrap.php';
+  require_once 'bootstrap.php';
+  $entityManager = GetEntityManager();
 
 use Doctrine\ORM\Tools\SchemaTool;
 
