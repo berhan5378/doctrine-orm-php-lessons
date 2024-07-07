@@ -6,8 +6,28 @@ if ($entityManager === false) {
     exit(1);
 } 
 
-use App\Entity\User;
-$userRepository = $entityManager->getRepository(User::class);
+use App\Entity\User; 
+//use App\Entity\UserGroup;
+$user = $entityManager->getRepository(User::class)->find(11);
+/* $group = $entityManager->getRepository(UserGroup::class)->find(6);
+
+if ($group) {
+    $group->setName('Four');
+    $entityManager->persist($group);
+
+    echo "User removed from group successfully.\n";
+} else {
+    echo "User or group not found.\n";
+}
+*/
+ 
+
+foreach ($user->getPosts() as $post){  // get the post for user
+      
+    $post->setTitle('title');
+    $post->setContent('content');
+    echo 'yes';
+}
 
 //Find Users by Criteria
 /*
@@ -26,10 +46,10 @@ foreach($users as $user){
 */
 
 //Find User by ID
-
-$user = $userRepository->find(2);
-echo $user ? $user->setName('Jane Doe'). "Updated User with ID " . $user->getId() . "\n": 'User not found';
-
+/*
+$user = $userRepository->find(11);
+echo $user ? $user->addUser('you'). "Updated User with ID " . $user->getId() . "\n": 'User not found';
+*/
 
 // Flush the changes to the database
 
