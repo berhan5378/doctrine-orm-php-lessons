@@ -7,6 +7,8 @@
      exit(1);
  }
 use App\Entity\User;
+//use App\Entity\UserGroup;
+//use App\Entity\Post;
 
 // Find a user by its primary key (ID)
 $userId = 1;
