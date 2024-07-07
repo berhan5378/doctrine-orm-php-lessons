@@ -1,21 +1,19 @@
 <?php
   require_once 'bootstrap.php';
-  $entityManager = GetEntityManager();
 
-if ($entityManager === false) {
-    echo "Entity Manager could not be initialized.\n";
-    exit(1);
+  use App\Entity\User;
+  use Doctrine\ORM\EntityManagerInterface;
+
+function createUser(EntityManagerInterface $em, $name, $email)
+{
+  // Create a new User instance
+    $user = new User();
+    $user->setName($name);
+    $user->setEmail($email);
+  // Persist the user to the database
+    $em->persist($user);
+    $em->flush(); // Flush to save changes
+
+    echo "User created successfully.\n";
 }
-
-use App\Entity\User;
-
-// Create a new User instance
-$user = new User();
-$user->setName('John Doe');
-$user->setEmail('john.doe@example.com');
-
-// Persist the user to the database
-$entityManager->persist($user);
-$entityManager->flush();
-
-echo "Created User with ID " . $user->getId() . "\n";
+createUser($entityManager, 'berhan', 'berhan@gmail.com');
