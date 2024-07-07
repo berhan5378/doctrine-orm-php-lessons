@@ -12,11 +12,12 @@ $users = $userRepository->findAll();
 if (empty($users)) {
     echo "No users found.\n";
 } else {
+    echo "\n","User","\t\t","Email","\n";
+    echo "-----"."\t\t"."-----"."\n";
     foreach ($users as $user) {
-        echo sprintf("-%s\n", $user->getName());
-        echo sprintf(" Email: %s\n", $user->getEmail());
-        echo $user->getId()."\n";
+        echo  $user->getName(),"\t\t",$user->getEmail(),"\n";
     }
+     echo "\n";
 }
 
 
