@@ -24,4 +24,4 @@ function createPost(EntityManagerInterface $em, $title, $content, $userId)
 
     echo "Post created successfully.\n";
 }
-createPost($entityManager, 'what', 'what is your name', 9);
+createPost($entityManager, 'Thrid Post', 'Content of the thrid Post', 2);
