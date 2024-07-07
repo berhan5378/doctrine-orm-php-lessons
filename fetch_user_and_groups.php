@@ -3,23 +3,25 @@
 require_once "bootstrap.php";
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 
-$entityManager = GetEntityManager();
-
-// Fetch the user by ID (replace 1 with the actual user ID)
-$user = $entityManager->find(User::class, 5);
-
-if ($user === null) {
-    echo "No user found.\n";
-    exit(1);
+function fetchUserAndGroups(EntityManagerInterface $em, $users)
+{
+   echo "\n","Users", "\t\t", "Groups" ,"\n";
+   echo "------". "\t\t". "-----". "\n";
+    foreach($users as $user){
+        foreach ($user->getGroups() as $group){  // get the group for user
+            echo $user->getName(),"\t\t" ,$group->getName(),"\n";
+        }
+    } 
+    echo "\n";
 }
+$UserRepository = $entityManager->getRepository(User::class);
 
-echo "User: " . $user->getName() . "\n";
-echo "Email: " . $user->getEmail() . "\n";
-
-// Fetch and print groups
-echo "Groups:\n";
-foreach ($user->getGroups() as $group) {
-    echo "- " . $group->getName() . "\n";
-    echo "- " . $group->getId() . "\n";
+// Find all Users
+$users = $UserRepository->findAll();
+if (empty($users)) {
+    echo "No users found.\n";
+} else{
+    fetchUserAndGroups($entityManager, $users);
 }
