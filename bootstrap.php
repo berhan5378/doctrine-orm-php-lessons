@@ -8,19 +8,21 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 require_once 'vendor/autoload.php';
 
-$isDevMode = true;
-
+$isDevMode = true;  
 //$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yaml"), $isDevMode);
 //$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
+
 // Register the annotation loader
 AnnotationRegistry::registerLoader('class_exists');
 $config->setMetadataDriverImpl(new AnnotationDriver(new AnnotationReader(), [__DIR__."/src"]));
 
 // Database configuration parameters
 $conn = [
-    'driver' => 'pdo_sqlite',
-    'path' => __DIR__ . '/db.sqlite',
+    'driver'   => 'pdo_mysql',
+    'user'     => 'root',
+    'password' => '',
+    'dbname'   => 'blog_application',
 ];
 
 try {
