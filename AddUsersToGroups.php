@@ -6,12 +6,14 @@ use App\Entity\User;
 use App\Entity\UserGroup;
 use Doctrine\ORM\EntityManagerInterface;
 
-function addUserToGroup(EntityManagerInterface $em, $userId, $groupId)
+function addUserToGroup(EntityManagerInterface $em, $name, $groupName)
 {
-    $user = $em->getRepository(User::class)->find($userId);
-    $group = $em->getRepository(UserGroup::class)->find($groupId);
-
-    if (!$user  ) {
+    $userRepository = $em->getRepository(User::class);
+    $user = $userRepository->findOneBy(["name" => "$name"]);
+    $groupRepository = $em->getRepository(UserGroup::class);
+    $group = $groupRepository->findOneBy(["name" => "$groupName"]);
+ 
+    if (!$user || !$group  ) {
         echo "User or Group not found.\n";
         return;
     }
@@ -23,6 +25,6 @@ function addUserToGroup(EntityManagerInterface $em, $userId, $groupId)
 
     echo "User added to group successfully.\n";
 }
-$id=2;
-$groupId=1;
-addUserToGroup($entityManager, $id, $groupId);
+$username='bini';
+$groupname='Three';
+addUserToGroup($entityManager, $username, $groupname);
