@@ -12,7 +12,7 @@ class Post
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="user_id",type="integer")
      * @ORM\GeneratedValue
      */
     private $id;
