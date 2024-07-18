@@ -5,10 +5,10 @@ use App\Entity\Post;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
-function createPost(EntityManagerInterface $em, $title, $content, $userId)
+function createPost(EntityManagerInterface $em, $title, $content, $email)
 {
-    $user = $em->getRepository(User::class)->find($userId);
-
+    $userRepository = $em->getRepository(User::class);
+    $user = $userRepository->findOneBy(["email" => "$email"]);
     if (!$user) {
         echo "User not found.\n";
         return;
@@ -19,9 +19,13 @@ function createPost(EntityManagerInterface $em, $title, $content, $userId)
     $post->setContent($content);
     $post->setUser($user);
 
-    $em->persist($post);
-    $em->flush();
+    try {
+        $em->persist($post);
+        $em->flush(); // Flush to save changes
+      } catch (\Exception $e) {
+          echo "An error occurred: " . $e->getMessage();
+      }
 
     echo "Post created successfully.\n";
 }
-createPost($entityManager, 'Thrid Post', 'Content of the thrid Post', 2);
+createPost($entityManager, 'thrid Post', 'Content of the thrid Post', 'bini@gmail.com');
