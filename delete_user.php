@@ -11,12 +11,11 @@ use App\Entity\User;
 //use App\Entity\Post;
 
 // Find a user by its primary key (ID)
-$userId = 1;
+$userId = 3;
 $user = $entityManager->find(User::class, $userId);
 
-if ($user === null) {
-    echo "User with ID $userId does not exist.\n";
-    exit(1);
+if (!$user) {
+    throw new \Exception("User not found.");
 }
 
 // Remove the user from the database
